@@ -28,35 +28,32 @@ class Searching extends React.Component{
 
         try
         {
-            let locationResponce = await axios.get(URL);
-        console.log(locationResponce.data)
-        this.setState({
+          let locationResponce = await axios.get(URL);
+          console.log(locationResponce.data);
+          this.setState({
             cityName: locationResponce.data[0].display_name,
             Longitude: locationResponce.data[0].lon,
-            Latitude: locationResponce.data[0].lat
-        })
+            Latitude: locationResponce.data[0].lat,
+          });
         }
         catch
         {
             //ERORR
         }
     }
-// https://maps.locationiq.com/v3/staticmap?key=<YOUR_ACCESS_TOKEN>&center=<latitude>,<longitude> <-- to put map
     render(){
         return (
           <div>
-            <Form onSubmit={this.getCityData}>
+            <Form onSubmit={this.getCityData} style={{textAlign:"center"}} >
               <input type="text" name="cityName" placeholder="Search here" />
               <Button variant="primary" type="submit">
                 Search
               </Button>
             </Form>
 
-            <h3>City Name: {this.state.cityName}</h3>
-            <h3>Longitude: {this.state.Longitude}</h3>
-            <h3>Latitude: {this.state.Latitude}</h3>
-
-            <img alt="map" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.Latitude},${this.state.Longitude}`} />
+            <h3 style={{textAlign:"center"}}>City Name: {this.state.cityName}</h3>
+            <h4 style={{textAlign:"center"}}>Longitude: {this.state.Longitude}</h4>
+            <h4 style={{textAlign:"center"}}>Latitude: {this.state.Latitude}</h4>
           </div>
         );
     }
